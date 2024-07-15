@@ -15,29 +15,26 @@ Methods used for WQ analysis adapted from:
 - See the [BD Accuri White Paper (Gatza et al., 2013)](https://www.umces.edu/sites/default/files/accuri-wp-assessing-water-quality.pdf), Assessing Water Quality with the BD Accuri™ C6 Flow Cytometer
 
 ## Abbreviations commonly used in flow cytometry:
-1.  **FSC**: Forward Scatter
+1.  **FSC**: Forward Scatter is related to the size of the cell. The larger the cell, the more light is scattered in the forward direction.
     -   **FSC.A**: Forward Scatter Area
     -   **FSC.H**: Forward Scatter Height
-    Forward scatter is related to the size of the cell. The larger the cell, the more light is scattered in the forward direction.
 
-2.  **SSC**: Side Scatter
+2.  **SSC**: Side Scatter reflects the complexity or granularity of the cell. For example, cells with internal structures, like granules, will scatter more light to the side.
     -   **SSC-A**: Side Scatter Area
     -   **SSC-H**: Side Scatter Height
-    Side scatter reflects the complexity or granularity of the cell. For example, cells with internal structures, like granules, will scatter more light to the side.
+      
+3.  **FITC**: Fluorescein Isothiocyanate is a fluorescent dye used to label cells or components within cells. It's not explicitly listed in your abbreviations, but it's a common fluorochrome in flow cytometry.
 
-3.  **FITC**: Fluorescein Isothiocyanate
-    -   This is a fluorescent dye used to label cells or components within cells. It's not explicitly listed in your abbreviations, but it's a common fluorochrome in flow cytometry.
+4.  **APC**: Allophycocyanin is another fluorescent dye used in flow cytometry.
 
-4.  The other abbreviations (like "BB515.A", "BB630.A", "BUV395.A", etc.) are likely referring to specific fluorescent markers or dyes used in the analysis. Each of these markers is designed to bind to a specific cell component or molecule and will emit light at a specific wavelength when excited by a laser. 
+5.  **PE**: Phycoerythrin is a bright fluorescent dye commonly used in flow cytometry.
 
-5.  **APC**: Allophycocyanin is another fluorescent dye used in flow cytometry.
+6.  **PerCP**: Peridinin Chlorophyll Protein Complex is a water soluble carotenoid pigment found in photosynthetic dinoflagellates.
 
-6.  **PE**: Phycoerythrin is a bright fluorescent dye commonly used in flow cytometry.
-   
-8.  **PerCP**: Peridinin Chlorophyll Protein Complex is a water soluble carotenoid pigment found in photosynthetic dinoflagellates.
-
-9.  **Time**: This usually refers to the time parameter, indicating the duration of the cell's passage through the laser beam, which can be useful for identifying doublets or aggregates.
+7.  **Time**: This usually refers to the time parameter, indicating the duration of the cell's passage through the laser beam, which can be useful for identifying doublets or aggregates.
 Each of these parameters provides different information about the cells being analyzed, allowing for detailed characterization of cell populations based on size, granularity, and the presence of specific markers or dyes.
+
+8. Other abbreviations are likely referring to specific fluorescent markers or dyes used in the analysis. Each of these markers is designed to bind to a specific cell component or molecule and will emit light at a specific wavelength when excited by a laser. 
 
 ## Packages
 ```{r}
@@ -101,7 +98,7 @@ In flow cytometry, target-specific signal is detected in the form of Fluorescenc
       
   - Adding **Propidium iodide (PI)** to SYBR® Green I allows for analysis of intact (viable) cells. PI only stains damaged "dead" cells, thus bacterial cells co-stained with SYBRPI will shift out of bacterial cell gate.
     
-  - Together, **SYBR® Green I and PI (SYBR/PI)** can optimally discriminate bacteria with disrupted vs intact membranes. In the presence of PI, the same gate that was used to determine the total bacterial cell concentration will now include only viable, intatc bacteria.
+  - Together, **SYBR® Green I and PI (SYBR/PI)** can optimally discriminate bacteria with disrupted vs intact membranes. In the presence of PI, the same gate that was used to determine the total bacterial cell concentration will now include only viable, intact bacteria.
   
 ```{r}
 # Renaming markers (optional)
