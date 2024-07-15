@@ -9,10 +9,10 @@ R packages and scripts:
 - For analysing flow cytometry experiments with model based clustering: functional principal component analysis adapted from http://rprops.github.io/PhenoFlow/
 
 Templates:
-To help water quality researchers standardize their analyses, the [Eawag template](https://www.bdbiosciences.com/content/dam/bdb/marketing-documents/unpublished-pdfs/Accuri-WP-Assessing-Water-Quality.pdf) for the BD Accuri C6 is available at bdbiosciences.com
+- To help water quality researchers standardize their analyses, the [Eawag template](https://www.bdbiosciences.com/content/dam/bdb/marketing-documents/unpublished-pdfs/Accuri-WP-Assessing-Water-Quality.pdf) for the BD Accuri C6 is available at bdbiosciences.com
 
 Methods used for WQ analysis adapted from:
-See the [BD Accuri White Paper (Gatza et al., 2013)](https://www.umces.edu/sites/default/files/accuri-wp-assessing-water-quality.pdf), Assessing Water Quality with the BD Accuri™ C6 Flow Cytometer
+- See the [BD Accuri White Paper (Gatza et al., 2013)](https://www.umces.edu/sites/default/files/accuri-wp-assessing-water-quality.pdf), Assessing Water Quality with the BD Accuri™ C6 Flow Cytometer
 
 ## Abbreviations commonly used in flow cytometry:
 1.  **FSC**: Forward Scatter
@@ -89,7 +89,7 @@ cyto_fluor_channels(gs)
 ```
 
 ## Step 1: Compensation
-- In flow cytometry, target-specific signal is detected in the form of Fluorescence. COmpensation must be performed to correct for spectral overlaps between channels (e.g. FITC emmission peak overlaps with PE emission peak). 
+In flow cytometry, target-specific signal is detected in the form of Fluorescence. Compensation must be performed to correct for spectral overlaps between channels (e.g. FITC emmission peak overlaps with PE emission peak). 
   
 - Proper controls: *Unstained Controls* to take into account intrinsic 'autofluorescence of a given type of cell; *Single Stained Controls* one for each color (e.g. SYBR only, PI only)
   - Some common sources of Fluorescence for flow include: Fluorochromes (e.g. FITC), Fluorescent proteins (to report gene expression), Fluroescent dyes (such as DNA or RNA binding dyes e.g. SYBR Green I (DNA), SYBR Green II (RNA), Propidium Iodide, etc.
@@ -102,6 +102,7 @@ cyto_fluor_channels(gs)
   - Adding **Propidium iodide (PI)** to SYBR® Green I allows for analysis of intact (viable) cells. PI only stains damaged "dead" cells, thus bacterial cells co-stained with SYBRPI will shift out of bacterial cell gate.
     
   - Together, **SYBR® Green I and PI (SYBR/PI)** can optimally discriminate bacteria with disrupted vs intact membranes. In the presence of PI, the same gate that was used to determine the total bacterial cell concentration will now include only viable, intatc bacteria.
+  
 ```{r}
 # Renaming markers (optional)
 colnames(fs)[colnames(fs)=="FL1-A"] <- "SYBR Green I-A"
@@ -114,15 +115,15 @@ fs_comp <- compensate(fs, spillover(fs[[1]])$`$SPILLOVER`)
 ```
 
 ## Step 2: Quality Control
-- Detect and remove anomalies by checking 1) flow rate, 2) signal acquisition, 3) dynamic range, then continue same process with cleaning and transformation
-- takes a while; remove bad anomalies "out-of-range" events
+Detect and remove anomalies by checking 1) flow rate, 2) signal acquisition, 3) dynamic range, then continue same process with cleaning and transformation
+- Takes a while; remove bad anomalies "out-of-range" events
 ```{r}
 # Quality Check of samples
 flow_auto_qc(fs_comp)
 ```
 
 ## Step 3: Transformation
-- Transform data to improve visualization and separate negative and positive events into discrete populations.
+Transform data to improve visualization and separate negative and positive events into discrete populations.
 - Optimal transformation for each parameter is data-dependent.
 - Methods include:
   - Log transformation
@@ -143,8 +144,8 @@ fs_comp_clean_trans <- transform(fs_comp_clean, estimateLogicle(fs_comp_clean[[1
 ```
    
 ### Visualize transformed data
-- Compare before and after transformation
-- Can use autogate or manual gate
+Compare before and after transformation
+
 ```{r}
 # Compare between before and after transformation
 fs_comp_clean_trans[[1]]
@@ -153,13 +154,14 @@ autoplot(fs_comp_clean_trans[[1]]) #after
 ```
   
 ## Step 4: Gating
-- Gating set should only be done after data is transformed
-- Full Gating Strategy:
+Gating set should only be done after data is transformed
+- Can use autogate or manual gate
+
+Full Gating Strategy:
 1. Unstained Control: Analyze an unstained sample to determine the baseline autofluorescence and background noise.
 2. FSC vs. SSC: Gate the **Main Cell** Population: Identify and gate the main cell population to exclude debris and large aggregates.
 3. FSC-A vs. FSC-H or FSC-W: Gate **Single Cells**: Ensure analysis is focused on single cells by gating out doublets and aggregates.
-4. SYBR Green I vs. PI: Distinguish **Live and Dead** Cells within the Single-Cell Gate: Use the gated single cells to set up quadrants for live and dead cells based on specific markers and their fluorescence.
-5. Buffer Control: Use a 1xPBS buffer **control** sample (or DI, MilliQ, Autoclaved feed, depending on what water matrix used) to identify and subtract any background cell populations present in the buffer.
+4. SYBR Green I vs. PI: Distinguish **Live and Dead** Cells within the Single-Cell Gate: Use the gated single cells to set up quadrants for live and dead cells based on specific markers and     5. Buffer Control: Use a 1xPBS buffer **control** sample (or DI, MilliQ, Autoclaved feed, depending on what water matrix used) to identify and subtract any background cell populations present in the buffer.
 
 ### Auto Gating
 ```{r}
