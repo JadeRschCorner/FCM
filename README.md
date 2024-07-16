@@ -80,9 +80,9 @@ keyword(fs[[1]])
 fs[[1]]@parameters@data
 
 # Show us our channels and markers
-cyto_channels(gs)
-cyto_markers(gs)
-cyto_fluor_channels(gs)
+cyto_channels(fs)
+cyto_markers(fs)
+cyto_fluor_channels(fs)
 ```
 
 ## Step 1: Compensation
